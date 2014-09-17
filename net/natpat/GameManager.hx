@@ -25,63 +25,42 @@ class GameManager
 	 * Bitmap and bitmap data to be drawn to the screen.
 	 */
 	public var bitmap:Bitmap;
-	public static var renderer:BitmapData;
-	
-	public var text:Text = new Text(10, 10, "Hello, World!", 20, 0xff000000);
-	public var emitter:Emitter;
+	public var screen:BitmapData;
 	
 	public var input:InputBox = new InputBox(10, 100, "", 200, 30, 18);
 	
+	public var guiBuffer:BitmapData;
 	
 	public function new(stageWidth:Int, stageHeight:Int) 
 	{
 		GC.SCREEN_WIDTH = stageWidth;
 		GC.SCREEN_HEIGHT = stageHeight;
 		
-		renderer = new BitmapData(stageWidth, stageHeight, false, 0x000000);
+		screen = new BitmapData(stageWidth, stageHeight, false, 0x000000);
 		
-		bitmap = new Bitmap(renderer);
+		guiBuffer = new BitmapData(stageWidth, stageHeight, false, 0);
 		
-		GV.screen = renderer;
+		bitmap = new Bitmap(screen);
 		
-		GuiManager.add(text);
-		GuiManager.add(input);
-		
-		var rot:RotationImage = new RotationImage(new BitmapData(6, 6, true, 0xffffffff), 36, false);
-		emitter = new Emitter(rot.getSheet(), rot.width, rot.height);
-		
-		
-		emitter.setColor(0xff0000, 0x00cccc);
-		emitter.setMotion(0, 125, 5, 360, 25, 0.5, Ease.quintOut);
-		emitter.setAlpha(1, 0, Ease.cubeIn);
-		emitter.setEmitTime(0.03, 0);
-		emitter.setSizeChange(1, 0, Ease.quintIn);
-		emitter.setFrameLength(0.05, 0.01, 0.5);
-		emitter.startEmitting();
+		GV.screen = screen;
 	}
 	
 	public function render():Void
 	{
-		renderer.lock();
+		screen.lock();
 		
 		//Render the background
-		renderer.fillRect(new Rectangle(0, 0, renderer.width, renderer.height), 0xffffff);
+		screen.fillRect(new Rectangle(0, 0, screen.width, screen.height), 0xffffff);
 		
-		emitter.render();
+		GuiManager.render(guiBuffer);
 		
-		GuiManager.render();
-		
-		renderer.unlock();
+		screen.unlock();
 	}
 	
 	public function update():Void
 	{
 		GuiManager.update();
 		
-		emitter.x = Input.mouseX;
-		emitter.y = Input.mouseY;
-		
-		emitter.update();
 		
 		Input.update();
 	}

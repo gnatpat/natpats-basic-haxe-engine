@@ -1,4 +1,5 @@
 package net.natpat.gui;
+import openfl.display.BitmapData;
 
 
 /**
@@ -7,7 +8,7 @@ package net.natpat.gui;
  */
 interface IGuiElement
 {
-	function render():Void;
+	function render(buffer:BitmapData):Void;
 	
 	function update():Void;
 	

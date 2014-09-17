@@ -1,5 +1,6 @@
 package net.natpat.gui;
 
+import flash.display.BitmapData;
 import flash.text.TextField;
 import flash.text.TextFormat;
 import net.natpat.GV;
@@ -87,7 +88,7 @@ class InputBox implements IGuiElement
 		return inputField.text;
 	}
 	
-	public function render():Void 
+	public function render(buffer:BitmapData):Void 
 	{
 		
 	}

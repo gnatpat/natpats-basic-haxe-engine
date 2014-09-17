@@ -10,7 +10,6 @@ import flash.display.Bitmap;
  */
 class GV 
 {
-	
 	/**
 	 * Reference to the stage
 	 */

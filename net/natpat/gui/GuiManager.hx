@@ -2,6 +2,7 @@ package net.natpat.gui;
 
 
 import net.natpat.gui.IGuiElement;
+import openfl.display.BitmapData;
 
 /**
  * ...
@@ -9,6 +10,7 @@ import net.natpat.gui.IGuiElement;
  */
 class GuiManager 
 {
+	
 	
 	 static var elements:Array<IGuiElement> = new Array<IGuiElement>();
 	
@@ -52,11 +54,11 @@ class GuiManager
 		}
 	}
 	
-	public static function render():Void
+	public static function render(buffer:BitmapData):Void
 	{
 		for (i in 0...elements.length)
 		{
-			elements[i].render();
+			elements[i].render(buffer);
 		}
 	}
 	

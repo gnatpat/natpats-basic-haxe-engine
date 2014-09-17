@@ -125,17 +125,17 @@ class Button implements IGuiElement
 		this.releasedFunction = releasedFunction;
 	}
 	
-	public function render():Void 
+	public function render(buffer:BitmapData):Void 
 	{
 		//If the button has a back render it
 		if (hasBack)
 		{
-			GV.screen.copyPixels(bitmapData, clipRectangle, renderLocation, null, null, true);
+			buffer.copyPixels(bitmapData, clipRectangle, renderLocation, null, null, true);
 		}
 		//If the button has an icon render that too over the top. Fun.
 		if (hasIcon)
 		{
-			GV.screen.copyPixels(bitmapData, normalRect, renderLocation, null, null, true);
+			buffer.copyPixels(bitmapData, normalRect, renderLocation, null, null, true);
 		}
 		if (hasText)
 		{

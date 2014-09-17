@@ -180,12 +180,12 @@ class Text implements IGuiElement
 		this.y = yCentre? (GC.SCREEN_HEIGHT - bitmapData.height) / 2 : this.y;
 	}
 	
-	public function render():Void
+	public function render(buffer:BitmapData):Void
 	{
 		if (bitmapData == null) return; 
 		renderLocation.x = x;
 		renderLocation.y = y;
-		GV.screen.copyPixels(bitmapData, clipRectangle, renderLocation, null, null, true);
+		buffer.copyPixels(bitmapData, clipRectangle, renderLocation, null, null, true);
 	}
 	
 	public function update():Void
