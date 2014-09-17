@@ -30,7 +30,6 @@ class Emitter
 	public function new(source:BitmapData, frameWidth = 0, frameHeight = 0) 
 	{
 		setSource(source, frameWidth, frameHeight);
-		frames = [0];
 	}
 	
 	/**
@@ -48,6 +47,13 @@ class Emitter
 		frameHeight = frameHeight != 0 ? frameHeight : height;
 		frameCount = Std.int(width / frameWidth) * Std.int(height / frameHeight);
 		frame = new Rectangle(0, 0, frameWidth, frameHeight);
+	}
+	
+	public function setFrameLength(length:Float, range:Float, reverseChance:Float = 0)
+	{
+		frameLength = length;
+		frameLengthRange = range;
+		this.reverseChance = reverseChance;
 	}
 	
 	public function startEmitting():Void
@@ -137,10 +143,11 @@ class Emitter
 			pp.y = p.y + p.yVel * td + p.gravity * td * td;
 			
 			// get frame
-			frame.x = frame.width * frames[Std.int(td * frameCount)];
+			var frameOn = Std.int(p.time / p.frameLength) % frameCount;
+			frameOn = p.reversed ? frameCount - frameOn - 1 : frameOn;
+			frame.x = frame.width * frameOn;
 			frame.y = Std.int(frame.x / width) * frame.height;
 			frame.x %= width;
-			
 			// draw particle
 			if (buffer!= null)
 			{
@@ -307,6 +314,8 @@ class Emitter
 		p.x = this.x + x;
 		p.y = this.y + y;
 		p.gravity = gravity + gravityRange * Math.random();
+		p.reversed = (Math.random() < reverseChance);
+		p.frameLength = frameLength + Math.random() * frameLengthRange;
 		_particleCount ++;
 		return (particle = p);
 	}
@@ -353,7 +362,12 @@ class Emitter
 	/** @ */  var frameHeight:UInt;
 	/** @ */  var frameCount:UInt;
 	/** @ */  var frame:Rectangle;
-	/** @ */  var frames:Array<Int>;
+	
+	//Frame length info
+	/** @ */  var frameLength:Float = 0.1;
+	/** @ */  var frameLengthRange:Float = 0;
+	/** @ */  var reverseChance = 0.0;
+	
 	
 	// Drawing information.
 	/** @ */  var pp:Point = new Point();

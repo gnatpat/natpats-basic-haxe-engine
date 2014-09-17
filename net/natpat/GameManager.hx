@@ -8,6 +8,7 @@ import net.natpat.gui.Button;
 import net.natpat.gui.InputBox;
 import net.natpat.particles.Emitter;
 import net.natpat.utils.Sfx;
+import openfl.geom.Point;
 
 import net.natpat.gui.Text;
 import net.natpat.gui.GuiManager;
@@ -27,9 +28,10 @@ class GameManager
 	public static var renderer:BitmapData;
 	
 	public var text:Text = new Text(10, 10, "Hello, World!", 20, 0xff000000);
-	public var emitter:Emitter = new Emitter(new BitmapData(4, 4, true, 0xffffffff));
+	public var emitter:Emitter;
 	
 	public var input:InputBox = new InputBox(10, 100, "", 200, 30, 18);
+	
 	
 	public function new(stageWidth:Int, stageHeight:Int) 
 	{
@@ -45,11 +47,16 @@ class GameManager
 		GuiManager.add(text);
 		GuiManager.add(input);
 		
+		var rot:RotationImage = new RotationImage(new BitmapData(6, 6, true, 0xffffffff), 36, false);
+		emitter = new Emitter(rot.getSheet(), rot.width, rot.height);
+		
+		
 		emitter.setColor(0xff0000, 0x00cccc);
 		emitter.setMotion(0, 125, 5, 360, 25, 0.5, Ease.quintOut);
 		emitter.setAlpha(1, 0, Ease.cubeIn);
-		emitter.setEmitTime(0.02, 0);
+		emitter.setEmitTime(0.03, 0);
 		emitter.setSizeChange(1, 0, Ease.quintIn);
+		emitter.setFrameLength(0.05, 0.01, 0.5);
 		emitter.startEmitting();
 	}
 	

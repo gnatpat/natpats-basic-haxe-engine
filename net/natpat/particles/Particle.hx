@@ -20,6 +20,9 @@ package net.natpat.particles;
 	
 	 var next:Particle;
 	 var prev:Particle;
+	 
+	 var reversed:Bool;
+	 var frameLength:Float;
 	
 	public function new() 
 	{
