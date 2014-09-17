@@ -343,7 +343,7 @@ class Emitter
 	// Particle information.
 	/** @ */  var particle:Particle;
 	/** @ */  var cache:Particle;
-	/** @ */  var _particleCount:UInt;
+	/** @ */  var _particleCount:UInt = 0;
 	
 	// Source information.
 	/** @ */  var source:BitmapData;

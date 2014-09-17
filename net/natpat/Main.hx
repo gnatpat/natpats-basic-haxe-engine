@@ -27,9 +27,9 @@ class Main extends Sprite
 		/**
 	 * Time at the beginning of the previous frame
 	 */
-	var prevTime:Int;
+	var prevTime = 0;
 	
-	var currentTime:Int;
+	var currentTime = 0;
 	
 	var inited:Bool;
 
