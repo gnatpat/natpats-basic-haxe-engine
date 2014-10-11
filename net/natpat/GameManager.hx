@@ -61,7 +61,6 @@ class GameManager
 	{
 		GuiManager.update();
 		
-		
 		Input.update();
 	}
 	

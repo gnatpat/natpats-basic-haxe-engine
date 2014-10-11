@@ -20,6 +20,8 @@ class GV
 	 */
 	public static var screen:BitmapData;
 	
+	public static var zoom:Float = 1;
+	
 	/**
 	 * Milliseconds elapsed since last frame
 	 */
