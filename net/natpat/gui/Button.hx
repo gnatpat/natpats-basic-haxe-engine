@@ -139,7 +139,7 @@ class Button implements IGuiElement
 		}
 		if (hasText)
 		{
-			text.render();
+			text.render(buffer);
 		}
 	}
 	
