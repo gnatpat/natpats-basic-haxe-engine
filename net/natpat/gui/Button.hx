@@ -41,7 +41,7 @@ class Button implements IGuiElement
 	
 	 var bitmapData:BitmapData;
 	 var renderLocation:Point;
-	 var text:Text;
+	 var textOverlay:Text;
 	
 	public var x:Int;
 	public var y:Int;
@@ -65,7 +65,7 @@ class Button implements IGuiElement
 	 * @param	asset				The name of the asset is Assets to use for this button
 	 */
 	 
-	public function new(source:BitmapData, x:Int, y:Int, width:Int, height:Int, releasedFunction:Dynamic, backIndex:Int = -1, overIndex:Int = -1, pressedIndex:Int = -1, releasedIndex:Int = -1, imageIndex:Int = -1, textOverlay:String = "", textSize:Int = 1)
+	public function new(source:BitmapData, x:Int, y:Int, width:Int, height:Int, releasedFunction:Void->Void, backIndex:Int = -1, overIndex:Int = -1, pressedIndex:Int = -1, releasedIndex:Int = -1, imageIndex:Int = -1)
 	{
 		this.x = x;
 		this.y = y;
@@ -115,12 +115,6 @@ class Button implements IGuiElement
 			clipRectangle = backRect;
 		}
 		
-		if (textOverlay != "")
-		{
-			text = new Text(x, y, textOverlay, textSize);
-			hasText = true;
-		}
-		
 		//Set released function
 		this.releasedFunction = releasedFunction;
 	}
@@ -139,7 +133,7 @@ class Button implements IGuiElement
 		}
 		if (hasText)
 		{
-			text.render(buffer);
+			textOverlay.render(buffer);
 		}
 	}
 	
@@ -172,9 +166,15 @@ class Button implements IGuiElement
 		
 		if (hasText)
 		{
-			text.x = x + ((width - text.width) / 2);
-			text.y = y + ((height - text.height) / 2) + 4;
+			textOverlay.x = x + ((width - text.width) / 2);
+			textOverlay.y = y + ((height - text.height) / 2) + 4;
 		}
+	}
+	
+	public function setText(text:String, textSize:Int = 18):String
+	{
+		textOverlay = new Text(x, y, text, textSize);
+		hasText = true;
 	}
 	
 	public function add():Void 
