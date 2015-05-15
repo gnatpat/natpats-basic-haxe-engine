@@ -166,12 +166,12 @@ class Button implements IGuiElement
 		
 		if (hasText)
 		{
-			textOverlay.x = x + ((width - text.width) / 2);
-			textOverlay.y = y + ((height - text.height) / 2) + 4;
+			textOverlay.x = x + ((width - textOverlay.width) / 2);
+			textOverlay.y = y + ((height - textOverlay.height) / 2) + 4;
 		}
 	}
 	
-	public function setText(text:String, textSize:Int = 18):String
+	public function setText(text:String, textSize:Int = 18):Void
 	{
 		textOverlay = new Text(x, y, text, textSize);
 		hasText = true;
