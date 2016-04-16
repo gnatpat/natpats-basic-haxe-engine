@@ -135,7 +135,6 @@ class Text implements IGuiElement
 	
 	public function set_text(newText:String):String
 	{
-		
 		_field.text = _text = newText;
 		updateGraphic();
 		return newText;

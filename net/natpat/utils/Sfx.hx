@@ -4,7 +4,7 @@ import flash.events.Event;
 import flash.media.Sound;
 import flash.media.SoundChannel;
 import flash.media.SoundTransform;
-import net.natpat.Assets;
+import openfl.Assets;
 
 /**
  * ...
@@ -17,8 +17,6 @@ class Sfx
 	
 	 var soundChannel:SoundChannel;
 	
-	 var soundTransform:SoundTransform;
-	
 	 var position:Float;
 	
 	 var loop:Bool;
@@ -27,20 +25,16 @@ class Sfx
 	 * Create a new sound object, 
 	 * @param	soundFile
 	 */
-	public function new(soundFile:Dynamic, loop:Bool = false) 
+	public function new(soundPath:String) 
 	{
-		//NEED TO WORK OUT HOW TO DO THIS IN HAXE!
-		//sound = new soundFile;
-		//soundChannel = new SoundChannel();
+		sound = Assets.getSound(soundPath);
 		position = 0;
-		soundTransform = new SoundTransform();
 	}
 	
-	public function play(boolloop:Bool = false):Void
+	public function play(?loop:Bool = false):Void
 	{
-		loop = boolloop;
+		this.loop = loop;
 		soundChannel = sound.play(position, 0);
-		soundChannel.soundTransform = soundTransform;
 		soundChannel.addEventListener(Event.SOUND_COMPLETE, soundComplete);
 	}
 	
@@ -58,7 +52,9 @@ class Sfx
 	
 	public function setVolume(volume:Float):Void
 	{
-		soundTransform.volume = volume;
+		var st = soundChannel.soundTransform;
+		st.volume = volume;
+		soundChannel.soundTransform = st;
 	}
 	
 	 function soundComplete(e:Event):Void

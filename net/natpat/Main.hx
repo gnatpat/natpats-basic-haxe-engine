@@ -63,6 +63,7 @@ class Main extends Sprite
 		stage.quality = StageQuality.HIGH;
 		stage.scaleMode = StageScaleMode.NO_SCALE;
 		stage.displayState = StageDisplayState.NORMAL;
+		prevTime = flash.Lib.getTimer();
 	}
 	
 	 function run(e:Event):Void

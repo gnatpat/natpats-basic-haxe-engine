@@ -100,6 +100,11 @@ class Ease
 	{
 		return -Math.cos(PI * t) / 2 + .5;
 	}
+		
+	public static function sine(t:Float):Float
+	{
+		return Math.sin(2 * Math.PI * t) / 2 + 0.5;
+	}
 	
 	/** Bounce in. */
 	public static function bounceIn(t:Float):Float

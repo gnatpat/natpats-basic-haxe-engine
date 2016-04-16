@@ -4,7 +4,6 @@ import flash.display.Bitmap;
 import flash.display.BitmapData;
 import flash.geom.Point;
 import flash.geom.Rectangle;
-import net.natpat.Assets;
 import net.natpat.GV;
 import net.natpat.Input;
 /**
